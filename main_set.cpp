@@ -17,6 +17,10 @@ int main(int argv, char** argc){
   ifstream cardFile1 (argc[1]);
   ifstream cardFile2 (argc[2]);
   string line;
+  char suit;
+  char num;
+  set<Card> alice;
+  set<Card> bob;
 
   if (cardFile1.fail() || cardFile2.fail() ){
     cout << "Could not open file " << argc[2];
@@ -25,16 +29,71 @@ int main(int argv, char** argc){
 
   //Read each file
   while (getline (cardFile1, line) && (line.length() > 0)){
-
+    suit = line[0];
+    num = line[2];
+    if (line.size() >= 4 && line[3] == '0'){ //value is ten
+      Card c(suit, 10);
+      alice.insert(c);
+    }
+    else{
+      Card c(suit, num);
+      alice.insert(c);
+    }
   }
   cardFile1.close();
 
 
   while (getline (cardFile2, line) && (line.length() > 0)){
-
+    suit = line[0];
+    num = line[2];
+    if (line.size() >= 4 && line[3] == '0'){ //value is ten
+      Card c(suit, 10);
+      bob.insert(c);
+    }
+    else{
+      Card c(suit, num);
+      bob.insert(c);
+    }
   }
   cardFile2.close();
   
-  
+  //game start
+  bool found = true;
+  while (found){
+    found = false;
+    for (auto it = alice.begin(); it != alice.end(); it++){
+      if (bob.count(*it)){
+        cout << "Alice picked matching card " << *it << endl;
+        alice.erase(*it);
+        bob.erase(*it);
+        found = true;
+        break;
+      }
+    }
+    
+    if (!found){
+      break;
+    }
+    found = false;
+
+    for (auto it = bob.rbegin(); it != bob.rend(); it++){
+      if (alice.count(*it)){
+        cout << "Bob picked matching card " << *it << endl;
+        alice.erase(*it);
+        bob.erase(*it);
+        found = true;
+        break;
+      }
+    }
+  }
+
+  cout << endl << "Alice's cards:" << endl;
+  for (auto it = alice.begin(); it != alice.end(); it++){
+    cout << *it << endl;
+  }
+  cout << endl << "Bob's cards:" << endl;
+  for (auto it = bob.rbegin(); it != bob.rend(); it++){
+    cout << *it << endl;
+  }
   return 0;
 }
