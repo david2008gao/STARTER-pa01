@@ -281,3 +281,11 @@ int main() {
     alice_game3.insert(Card('c', 'a'));
     alice_game3.insert(Card('d', '2'));
     bob_game3.insert(Card('s', '3'));
+    bob_game3.insert(Card('h', '4'));
+    playGame(alice_game3, bob_game3);
+    check(forward(alice_game3) == "c a,d 2", "playGame 3: alice unchanged");
+    check(forward(bob_game3) == "s 3,h 4", "playGame 3: bob unchanged");
+
+    cout << passed << " of " << total << " checks passed" << endl;
+    return 0;
+}
