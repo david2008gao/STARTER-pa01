@@ -78,9 +78,9 @@ Card_List::Node* Card_List::recursiveFind(const Card& card, Node* n) const{
     return nullptr;
 }
 
-void Card_List::print() const{
+void Card_List::print(std::ostream& os) const{
     for (Iterator it = begin(); it != end(); ++it){
-        cout << *it << endl;
+        os << *it << endl;
     }
 }
 

@@ -47,7 +47,7 @@ class Card_List {
     bool insert(const Card& card);     // insert value; return false if duplicate
     bool remove(const Card& card);
     bool contains(const Card& card) const;
-    void print() const;
+    void print(std::ostream& os = std::cout) const;
     Iterator begin() const;
     Iterator end() const;
     Iterator rbegin() const;
