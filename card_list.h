@@ -7,7 +7,6 @@
 #define CARD_LIST_H
 
 #include "card.h"
-#include <iostream>
 
 class Card_List {
 
@@ -21,6 +20,9 @@ class Card_List {
     Node* root;
     void clear(Node* n); // help destructor
     bool recursiveInsert(const Card& card, Node* cur); // help insert
+    bool recursiveContains(const Card& card, const Node* n) const;
+    Node* find(const Card& card) const;
+    Node* recursiveFind(const Card& card, Node* n) const;
     static Node* leftmost(Node* n);
     static Node* rightmost(Node* n);
     static Node* predecessor(Node* n);

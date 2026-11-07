@@ -92,7 +92,7 @@ int main(int argv, char** argc){
     cout << *it << endl;
   }
   cout << endl << "Bob's cards:" << endl;
-  for (auto it = bob.rbegin(); it != bob.rend(); it++){
+  for (auto it = bob.begin(); it != bob.end(); it++){
     cout << *it << endl;
   }
   return 0;
